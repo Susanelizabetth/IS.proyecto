@@ -11,12 +11,11 @@ phases:
     commands:
       - echo Building the application...
       - npm run build
-      - echo Exporting static files...
-      - npm run export
+
   post_build:
     commands:
       - echo Syncing files to S3...
-      - aws s3 sync out s3://appweb-s --delete
+      - aws s3 sync out s3://appweb-s/out --delete
 artifacts:
   files:
     - "**/*"
