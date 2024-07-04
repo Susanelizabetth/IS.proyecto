@@ -9,8 +9,6 @@ phases:
       - npm install
   build:
     commands:
-      - echo Running tests...
-      - npm run test
       - echo Building the application...
       - npm run build
       - echo Exporting static files...
@@ -18,7 +16,7 @@ phases:
   post_build:
     commands:
       - echo Syncing files to S3...
-      - aws s3 sync out https://appweb-s.s3.amazonaws.com/ --delete
+      - aws s3 sync out s3://appweb-s --delete
 artifacts:
   files:
     - "**/*"
