@@ -10,7 +10,8 @@ phases:
   build:
     commands:
       - echo Building the application...
-      - npm run build
+      - npm run test && npm run build
+      - sed -i 's|/_next/|./_next/|g' ./out/index.html
 
   post_build:
     commands:

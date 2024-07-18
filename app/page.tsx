@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import axios from "axios";
+import Header from "./components/Header";
 
 export default function Home() {
   const [chats, setChat] = useState<{ type: number; text: string }[]>([]);
@@ -10,25 +11,15 @@ export default function Home() {
     setInputValue(event.target.value);
   };
 
-  const handleButtonClick = async () => {
+  const handleButtonClick = () => {
     setChat((prevItems) => [...prevItems, { type: 1, text: inputValue }]);
     setInputValue("");
-    try {
-      const response = await axios.post(
-        "https://2s7x22jza5.execute-api.us-east-1.amazonaws.com/dev",
-        {
-          message: inputValue,
-        }
-      );
 
-      const mensajeRes = JSON.parse(response.data.body)?.message;
-      setChat((prevItems) => [...prevItems, { type: 0, text: mensajeRes }]);
-      console.log("Respuesta del servidor:");
-    } catch (error) {
-      // Manejar errores, como mostrar un mensaje de error
-      console.error("Error al enviar datos:", error);
-      alert("Error al enviar datos. Inténtalo de nuevo más tarde.");
-    }
+    const mensajeRes =
+      "Hola, nuestros Horario de atención del servicio: Lunes a viernes de 9:00 a 17:00 horas. Gracias por su atención.";
+
+    setChat((prevItems) => [...prevItems, { type: 0, text: mensajeRes }]);
+    console.log("Respuesta del servidor:");
   };
 
   return (
@@ -38,7 +29,11 @@ export default function Home() {
         <div className="relative w-96 h-96 bg-orange-300 top-56 left-72 rounded-full blur-xl"></div>
         <div className="relative w-96 h-96 bg-orange-300 bottom-[200px] left-[800px] rounded-full blur-xl"></div>
       </div>
-      <div className="h-[95vh] flex flex-col w-full m-5 p-10 backdrop-blur-3xl rounded-lg fixed bg-black/30">
+      <div className="h-[95vh] flex flex-col w-full m-5 px-10 pb-10 pt-4 backdrop-blur-3xl rounded-lg fixed bg-black/30">
+        <Header
+          title="ChatBot"
+          className="text-2xl font-extrabold text-orange-500 bg-white/70 p-2 rounded-xl"
+        />
         <div id="chats" className="grow flex flex-col-reverse gap-2 mb-5">
           {chats
             .slice()
@@ -48,7 +43,7 @@ export default function Home() {
                 className={
                   chat.type == 1
                     ? "bg-gray-300 rounded-lg text-start p-2 w-max self-end"
-                    : "rounded-lg text-end p-2 w-max"
+                    : "rounded-lg text-end p-2 w-max bg-orange-200/50"
                 }
                 key={index}
               >
