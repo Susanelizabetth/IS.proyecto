@@ -31,7 +31,7 @@ export default function Home() {
       </div>
       <div className="h-[95vh] flex flex-col w-full m-5 px-10 pb-10 pt-4 backdrop-blur-3xl rounded-lg fixed bg-black/30">
         <Header
-          title="ChatBot"
+          title="ChatBot Prueba"
           className="text-2xl font-extrabold text-orange-500 bg-white/70 p-2 rounded-xl"
         />
         <div id="chats" className="grow flex flex-col-reverse gap-2 mb-5">
